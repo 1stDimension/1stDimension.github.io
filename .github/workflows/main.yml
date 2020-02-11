@@ -20,9 +20,9 @@ jobs:
         gem install jekyll bundler
     - name: DEBUG
       run: |
-        echo $PWD,
+        echo $PWD;
         echo ls
     - name: Generate site
       run: |
-        jekyll build 
+        bundler exec jekyll build 
         
