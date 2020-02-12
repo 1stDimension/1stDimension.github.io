@@ -17,7 +17,7 @@ jobs:
       
     - name: Install Jekyll and bundler
       run: |
-        gem install jekyll bundler
+        gem install 
     - name: DEBUG
       run: |
         echo $PWD;
