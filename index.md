@@ -1,5 +1,6 @@
 ---
 title: Hello
+author: Me
 ---
 
 # Hello Blogging
@@ -10,4 +11,5 @@ Currently I'm using Jekyll to generate sites from markdown files. This sounds li
 
 In future I will probably overide files of this theme. For example something like adding a little visualisation to my posts. But I wouldn't look ahead this far right now. Untill I finish work on next post that's about it.
 
-Request you later
+Request you later,
+{{ author }}
