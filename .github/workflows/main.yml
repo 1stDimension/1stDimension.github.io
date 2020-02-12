@@ -15,9 +15,12 @@ jobs:
     - name: Setup Ruby for use with actions
       uses: actions/setup-ruby@v1.0.0
       
-    - name: Install Jekyll and bundler
+    - name: Install bundler
       run: |
-        gem install 
+        gem install bundler
+    - name: Install dependencies
+      run: |
+        bundle install
     - name: DEBUG
       run: |
         echo $PWD;
