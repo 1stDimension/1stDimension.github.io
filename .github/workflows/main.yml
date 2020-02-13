@@ -21,11 +21,13 @@ jobs:
     - name: Install dependencies
       run: |
         bundle install
-    - name: DEBUG
-      run: |
-        echo $PWD;
-        echo ls
     - name: Generate site
       run: |
         bundler exec jekyll build 
+    - name: List generated files
+      run: |
+        echo $PWD;
+        echo ls
+#     Add create repo
+#     add/commit/push to _site branch
         
