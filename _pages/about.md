@@ -1,6 +1,7 @@
 ---
-layout: default
 title: About
+layout: single
+toc: true
 ---
 # About page
 
