@@ -1,3 +1,4 @@
+theme: minimal-mistakes-jekyll
 include: 
   - _pages
 exclude:
