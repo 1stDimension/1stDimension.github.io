@@ -1,7 +1,8 @@
 ---
 title: About
-layout: single
-toc: true
+# layout: single
+# toc: true
+permalink: /about/
 ---
 # About page
 
