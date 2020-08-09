@@ -1,0 +1,33 @@
+name: Publish gh pages
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Ruby for use with actions
+      uses: actions/setup-ruby@v1.0.0
+      
+    - name: Install bundler
+      run: |
+        gem install bundler
+    - name: Install dependencies
+      run: |
+        bundle install
+    - name: Generate site
+      run: |
+        bundler exec jekyll build 
+    - name: List generated files
+      run: |
+        echo $PWD;
+        echo ls
+#     Add create repo
+#     add/commit/push to _site branch
+        
