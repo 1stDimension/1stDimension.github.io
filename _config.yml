@@ -9,6 +9,8 @@ description: |
 # paginate_path: /page:num/
 # show_excerpts: true
 title: 1stDimension's blog
+plugins:
+  - jekyll-feed
 defaults:
   # _posts
   - scope:
