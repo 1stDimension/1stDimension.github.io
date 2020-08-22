@@ -13,6 +13,8 @@ show_excerpts: true
 title: X-axis
 plugins:
   - jekyll-feed
+  - jekyll-scholar
+  - jekyll-assets
 defaults:
   # _posts
   - scope:
