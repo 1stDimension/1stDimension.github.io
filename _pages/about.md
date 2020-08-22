@@ -1,8 +1,12 @@
 ---
 title: About
-# layout: single
+layout: post
 # toc: true
 permalink: /about/
+tags:
+- about
+categories:
+- personal
 ---
 # About page
 
