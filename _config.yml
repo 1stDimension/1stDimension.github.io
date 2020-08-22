@@ -6,7 +6,9 @@ minima:
     github: 1stDimension
 minimal_mistakes_skin: dark
 description: |
-  tmp
+  Personal blog (eventually) about
+  broadly understood computer science.
+  For now using Jekyll, hosted on Github pages.
 # paginate: 5 # amount of posts to show
 # paginate_path: /page:num/
 show_excerpts: true
