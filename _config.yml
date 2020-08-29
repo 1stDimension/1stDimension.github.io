@@ -17,6 +17,7 @@ plugins:
   - jekyll-feed
   - jekyll-scholar
   - jekyll-assets
+  - jemoji
 defaults:
   # _posts
   - scope:
