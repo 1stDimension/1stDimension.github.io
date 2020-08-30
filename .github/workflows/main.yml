@@ -27,7 +27,8 @@ jobs:
     - name: List generated files
       run: |
         echo $PWD;
-        echo ls
-#     Add create repo
+        ls
+    - name: commit built site
+      run: git add -f-A _site/ && git commit -m "build" && git push
 #     add/commit/push to _site branch
         
