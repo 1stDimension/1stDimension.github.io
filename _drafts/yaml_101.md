@@ -1,0 +1,243 @@
+---
+title: YAML 101
+excerpt: Introduction to Yaml data serialization standard
+---
+
+## Introduction
+
+YAML is short for "YAML Ain't Markup Language", it's a way of storing basic data structures in human
+readable form. You may also have heard about JSON, XML, TOML formats which are also used for this purpose.
+It's worth mentioning that YAML is a superset  of JSON, meaning any valid JSON file is also a valid YAML
+file. The aim of this blog post is to introduce you to a new format and show a few trick if you knew it
+already
+
+YAML 1.2 specification mentions a few goals
+1. YAML is easily readable by humans.
+1. YAML data is portable between programming languages.
+1. YAML matches the native data structures of agile languages.
+1. YAML has a consistent model to support generic tools.
+1. YAML supports one-pass processing.
+1. YAML is expressive and extensible.
+1. YAML is easy to implement and use
+
+
+> :warning: Library used to parse yaml here is PyYaml. Particular library's complines with the
+> specification may vary.
+
+> :warning: Jekyll theme used here and I believe library used by jekyll for highlighting snippets does not
+> work well with some advance yaml syntax e.g. multiline strings variations. 
+
+## Basic Syntax
+
+The main reason behind YAML is data structure representation. There are basically 3 structures sequence,
+map(mapping) and variable, actual document itself is just a big map. As I mentioned previously valid
+JSON is a valid YAML, but YAML can do much more with much less characters. First of all, identifiers for
+structures don't have to be enclosed in double quotes. Brackets can also be skipped, instead of special
+formatting of the file is used. An identifier ends with ":" and non zero number of whitespace characters
+after witch formatting determines the structure. If value is in the same line structure created is
+variable. If after ":" newline character is present and some following lines have variables defined in
+them with the same level of indentation but higher than "parent" identifier, this construct is a mapping.
+If next lines start with "-" then a sequence was created.
+
+```yaml
+string: value
+integer: 1
+float: 1.1
+dictionary:
+  key1: value1
+  key2: value2
+array:
+- one
+- two
+- tree
+```
+
+Great thing about each one of them is the fact that nesting is allowed.
+Do you want array of maps of maps? Piece of cake, just take look.
+
+```yaml
+array:
+- mapZero:
+    key0: 
+      subkey0: s0
+      subkey1: s1
+- mapOne:
+    key0: 
+      subkey0: s0
+      subkey1: s1
+
+```
+You can create a sequence and a map inline using syntax similar to JSON. This syntax also allows creation
+of documents independent from formatting, albeit it's less clear this way.
+
+```yaml
+array: [ mapZero: {key0: {subkey0: s0, subkey1: s1}}, mapOne:  {key0: {subkey0: s0, subkey1: s1}}
+]
+```
+Latter 2 snippets of yaml are interchangeable.
+
+## Advanced Syntax
+
+YAML, when looked in depth, is much more complex that any one might have anticipated after first contact.
+This section is a breve overview of some less popular but useful features.
+
+### Multiline Strings
+
+As YAML is supposed to be "easily readable by humans" and sometimes long strings of characters are
+required to be under certain identifier. Let's say we want to put 256 characters under key "long_string".
+We can put them in one line
+
+```yaml
+long_string: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac elit mi. Vestibulum sem orci, placerat sed condimentum id, rutrum imperdiet dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur nullam.
+```
+
+It's readable to the certain degree but we can do better. For example add double quotes
+```yaml
+long_string: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Integer ac elit mi. Vestibulum sem orci, placerat sed condimentum id,
+rutrum imperdiet dolor. Vestibulum ante ipsum primis in faucibus orci
+luctus et ultrices posuere cubilia curae; Curabitur nullam."
+```
+
+Yaml has multiple versions of multiline strings, depending on character after the identifier. String
+starts form the following line, it has to have increased level of indentation. You could also explicitly
+state number of whitespace characters before each line begins. If unspecified defaults to number of
+whitespace characters before first line in string. Multiple variation go like this:
+
+```yaml
+zero: |2
+   This text is interpreted literally
+   notice this was indented with 3 spaces with string starting at 2
+one: |
+  This text is interpreted literally
+  new lines are preserved
+two: >
+  This text is folded
+  newline characters are replaced with spaces
+  
+  blank lines are replaced with newline characters
+tree: |-
+  In this case trailing newline is removed
+four: |+
+  Now any trailing newline character is preserved
+
+
+# Like ones above
+```
+
+When using PyYaml a dictionary was loaded. After using pretty printing pprint module, this is what I got:
+```python
+{   'four': 'Now any trailing newline character is preserved\n\n\n',
+    'one': 'This text is interpreted literally\nnew lines are preserved\n',
+    'tree': 'In this case trailing newline is removed',
+    'two': 'This text is folded newline characters are replaced with spaces\n'
+           'blank lines are replaced with newline characters\n',
+    'zero': ' This text is interpreted literally\n'
+            ' notice this was indented with 3 spaces with string starting at '
+            '2\n'}
+```
+Remember that by definition maps are unordered so your mileage may vary. In python it's a bit more
+complex (check bibliography for Python's dictionary)
+
+### Variable interpretation
+
+Variables in yaml can be mapped (:wink:) to different types, like floats, ints etc. We can also make YAML
+parser do some conversion between different representation of a number. It's a nice little feature
+allowing for easier variable definition for example:
+
+```yaml
+sequence:
+  - 0xFFFFFF
+  - 0xFF0000
+  - 0xFFFFFF
+```
+
+turns into:
+
+```python
+{'sequence': [16777215, 16711680, 16777215]}
+```
+
+Some other formats for numbers are listed below:
+
+```yaml
+sequence:
+- 010 #integer interpreted as Base8
+- 0x10 #integer interpreted as hexadecimal
+- 10  #integer 
+- 10.2 # floating point
+- 10.2.1 # string
+```
+
+Using PyYaml this is what was loaded:
+```python
+{'sequence': [8, 16, 10, 10.2, '10.2.1']}
+```
+
+### Multiple documents in one file
+
+```yaml
+#document zero
+document_number: 0
+just_array:
+- one:
+    q: 1
+- two:
+    w: 2
+---
+---
+#document one
+document_number: 1
+strange_dictionary:
+  k:
+  - j
+  - m
+```
+
+### Anchors
+
+
+You may have heard about **DRY** principle that is "Don't Repeat Yourself". Yaml has a convenient feature
+that allows applying this principle namely anchors, aliases. Anchors behave like variables inside the
+document itself. An anchor is creates using "&anchor_name" syntax. It's value can be later referenced
+using "*anchor_name" syntax.
+
+```yaml
+variable: &reference value
+different_variable: *reference 
+```
+turns into
+```python
+{'variable': 'value', 'different_variable': 'value'}
+```
+
+This is already cool but I m not done yet. In case of more complex structures, like maps and sequences,
+you can actually merge structures together and not override them.  In this case special syntax
+"<< : *anchor_name" is used. It's worth mentioning it was added in YAML 1.1
+
+```yaml
+younger_sister: &one
+ first name: Serena 
+ last name: Williams
+older_sister:
+ << : *one
+ first name: Venus
+```
+After parsing it will look like
+```python
+{   'older_sister': {'first name': 'Venus', 'last name': 'Williams'},
+    'younger_sister': {'first name': 'Serena', 'last name': 'Williams'}
+}
+```
+Actually you could specify sequence of references after "<< :" operator, but inline sequence must be used
+([ item0, item1]). The next one will overrider the previous one. Theoretically after merging operator
+inline dictionary can be specified like ( { q: 0, w: 1} ). As far I know inline dictionary and sequence aren't 
+actual terms in case of YAML, but I hope you get it.
+
+
+## Bibliography
+
+1. [YAML Ain’t Markup Language (YAML™) Version 1.2 3rd Edition, Patched at 2009-10-01](https://yaml.org/spec/1.2/spec.pdf)
+1. [Is variable a data structure: stack overflow discution](https://stackoverflow.com/questions/2046807/can-a-variable-like-int-be-considered-a-primitive-fundamental-data-structure)
+1. [Python dictionary implementation](https://github.com/python/cpython/blob/master/Objects/dictobject.c)
+1. [Reusing data with YAML Anchors, Aliases and Merge Keys](http://blogs.perl.org/users/tinita/2019/05/reusing-data-with-yaml-anchors-aliases-and-merge-keys.html#:~:text=YAML%20Anchors%20and%20Aliases,name%20%2C%20like%20a%20Perl%20reference.)

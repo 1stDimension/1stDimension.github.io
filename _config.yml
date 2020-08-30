@@ -1,1 +1,41 @@
-theme: jekyll-theme-hacker
+# theme: minimal-mistakes-jekyll
+theme: minima
+minima:
+  skin: dark
+  social_links:
+    github: 1stDimension
+minimal_mistakes_skin: dark
+description: |
+  Personal blog (eventually) about
+  broadly understood computer science.
+  For now using Jekyll, hosted on Github pages.
+# paginate: 5 # amount of posts to show
+# paginate_path: /page:num/
+show_excerpts: true
+title: X-axis
+plugins:
+  - jekyll-feed
+  - jekyll-scholar
+  - jekyll-assets
+  - jemoji
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      excerpt_separator: <!--END_EXCERPT-->
+      author_profile: true
+      read_time: true
+      comments: true
+      # share: true
+      related: true
+include: 
+  - _pages
+# collections:
+  # portfolio:
+    # output: true
+    # permalink: /:collection/:path/
+exclude:
+  - e_*
