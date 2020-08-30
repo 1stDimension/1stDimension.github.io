@@ -1,6 +1,5 @@
 ---
 title: YAML 101
-layout: post
 excerpt: Introduction to Yaml data serialization standard
 ---
 
