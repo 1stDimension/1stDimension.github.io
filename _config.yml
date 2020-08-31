@@ -2,6 +2,7 @@
 theme: minima
 minima:
   skin: dark
+  date_format: "%F"
   social_links:
     github: 1stDimension
 minimal_mistakes_skin: dark
