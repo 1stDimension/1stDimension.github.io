@@ -4,6 +4,11 @@ minima:
   skin: dark
   date_format: "%F"
   social_links:
+    github: &me 1stDimension
+
+github_username: *me
+rss: rss
+author: *me
 description: >
   Personal blog (eventually) about
   broadly understood computer science.
