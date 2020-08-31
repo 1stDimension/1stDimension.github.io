@@ -9,6 +9,9 @@ minima:
 github_username: *me
 rss: rss
 author: *me
+header_pages:
+  - _pages/about.md
+  - index.md    
 description: >
   Personal blog (eventually) about
   broadly understood computer science.
