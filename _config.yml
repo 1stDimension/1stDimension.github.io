@@ -25,6 +25,7 @@ defaults:
       type: posts
     values:
       layout: post
+      author: 1stDimension
       excerpt_separator: <!--END_EXCERPT-->
       author_profile: true
       read_time: true
