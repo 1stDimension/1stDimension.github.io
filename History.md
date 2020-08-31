@@ -1,3 +1,6 @@
+---
+title: Changelog
+---
 * [Adding history to header](https://github.com/1stDimension/1stDimension.github.io/commits/92795d777c2006f2a99d1e8695b340703fd6bc0b)
 * [Adding history file](https://github.com/1stDimension/1stDimension.github.io/commits/955a06a15056ead61086e0070dc163029625587b)
 * [small fixes in yaml_101 post](https://github.com/1stDimension/1stDimension.github.io/commits/51a7b00c71a9a5a3ab7edd234f2542e9b7791b8d)
