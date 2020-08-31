@@ -15,8 +15,8 @@ show_excerpts: true
 title: X-axis
 plugins:
   - jekyll-feed
-  - jekyll-scholar
-  - jekyll-assets
+  # - jekyll-scholar
+  # - jekyll-assets
   - jemoji
 defaults:
   # _posts
