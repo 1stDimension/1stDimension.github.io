@@ -28,9 +28,9 @@ gem 'jekyll'
 group :jekyll_plugins do
   gem "jekyll-feed"
   gem 'jemoji'
-  gem 'jekyll-compose'
+  # gem 'jekyll-compose'
   gem 'jekyll-scholar'
-  gem "jekyll-assets"
+  # gem "jekyll-assets"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
