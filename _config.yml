@@ -19,6 +19,7 @@ show_excerpts: true
 title: X-axis
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
   # - jekyll-scholar
   # - jekyll-assets
   - jemoji
