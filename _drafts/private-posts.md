@@ -1,6 +1,8 @@
 ---
 layout: post
-title: private_posts
+author: 1stDimension
+title: Private posts on Github
+excerpt: How to have private and public blog using Github Pages, git with multiple remotes.
 ---
 
 ## Bibliography
