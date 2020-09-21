@@ -47,4 +47,5 @@ include:
     # output: true
     # permalink: /:collection/:path/
 exclude:
-  - e_*
+  - exclude
+  - Gemfile*
