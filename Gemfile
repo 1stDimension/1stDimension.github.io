@@ -28,7 +28,7 @@ gem 'jekyll'
 group :jekyll_plugins do
   gem "jekyll-feed"
   gem 'jemoji'
-  # gem 'jekyll-compose'
+  gem 'jekyll-compose'
   gem 'jekyll-scholar'
   # gem "jekyll-assets"
 end
