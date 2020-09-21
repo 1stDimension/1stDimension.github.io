@@ -5,6 +5,10 @@ title: Private posts on Github
 excerpt: How to have private and public blog using Github Pages, git with multiple remotes.
 ---
 
+## How Github Pages works
+Github Pages is a feature of Github that allows serving static files
+
+
 ## Git a distributed version control system
 
 Here are remotes 
