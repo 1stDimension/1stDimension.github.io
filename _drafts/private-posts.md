@@ -18,6 +18,8 @@ origin  git@github.com:1stDimension/1stDimension.git (fetch)
 origin  git@github.com:1stDimension/1stDimension.git (push)
 ```
 
+## Multiple remotes as multiple environments for Github 
+
 ## Bibliography
 
 1. ![About GitHub Pages](https://docs.github.com/en/github/working-with-github-pages/about-github-pages)
