@@ -5,6 +5,15 @@ title: Private posts on Github
 excerpt: How to have private and public blog using Github Pages, git with multiple remotes.
 ---
 
+## Git a distributed version control system
+
+Here are remotes 
+```sh
+$ git remote -v
+origin  git@github.com:1stDimension/1stDimension.git (fetch)
+origin  git@github.com:1stDimension/1stDimension.git (push)
+```
+
 ## Bibliography
 
 1. ![About GitHub Pages](https://docs.github.com/en/github/working-with-github-pages/about-github-pages)
