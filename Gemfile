@@ -30,6 +30,7 @@ group :jekyll_plugins do
   gem 'jemoji'
   gem 'jekyll-compose'
   gem 'jekyll-scholar'
+  gem 'jekyll-diagrams'
   # gem "jekyll-assets"
 end
 
