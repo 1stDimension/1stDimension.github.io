@@ -6,8 +6,14 @@ excerpt: How to have private and public blog using Github Pages, git with multip
 ---
 
 ## How Github Pages works
-Github Pages is a feature of Github that allows serving static files
-
+Github Pages is a feature of Github that allows serving static files. This very site is accessible
+thanks to this service.There are limitations. Free plan only includes public repo, paid plans
+include private ones, site will still be accessible to the public. This is excellent but public
+repos have their problems. First of all everything is public, that includes work in progres posts,
+not all from which might be released. It is very hard to create workflow of releasing only completed
+posts to the public. You could utilize branches of git. Have branch for each post and when ready
+just merge them into master. However posts will be publicly accessible on branch's page before going
+public. Good but we can do better.
 
 ## Git a distributed version control system
 
