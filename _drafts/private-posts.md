@@ -13,7 +13,8 @@ is excellent but public repos have their problems. First of all, everything is p
 includes work in progress posts, not everyone  of which might be released. It is very hard
 to create a workflow of releasing only completed posts to the public. You could use branches
 of git. Have a branch for each post and when ready merge them into master. Yet posts will be
-accessible on the branch's page before going public. Good but we can do better.
+accessible on the branch's page before going public. Good but we can do better using one of
+git's features, remotes.
 
 ## Git a distributed version control system
 
