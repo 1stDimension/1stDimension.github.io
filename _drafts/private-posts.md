@@ -29,7 +29,7 @@ origin  git@github.com:1stDimension/1stDimension.git (fetch)
 origin  git@github.com:1stDimension/1stDimension.git (push)
 ```
 Left column contains names of remotes, right url of where to send changes (*push*) and from
-where copy changes (*fetch*).
+where copy changes (*fetch*). Origin is the name of default remote.
 
 In the example above both urls are the same but they don't have to. This results in sth called
 "Triangular workflow". Michael Haggerty described it briefly on "The GitHub Blog" [here](https://github.blog/2015-07-29-git-2-5-including-multiple-worktrees-and-triangular-workflows/#improved-support-for-triangular-workflows)
@@ -39,8 +39,22 @@ In the example above both urls are the same but they don't have to. This results
 Remotes are nice and all but how do they solve the problem with all public repos. You can simply
 create 2 repos on Github one private, let's call it *working*, one public, let's call it *publish*.
 Use working as main repository you push your changes to. When the time comes, i.e. you finish working
-on your blog post, you marge "post branch" into branch from witch GitHub pages are served. and push
-changes to *publish* repo
+on your blog post, you marge "post branch" into branch from which GitHub pages are served, and push
+changes to *publish* repo. Now WIP posts are hidden and page can be served with free plan. But how
+do we do it? With ```git remote commands```
+
+```sh
+# Adding remote "publish"
+$ git remote add publish {{ remote url}}
+# Update existing remotes url
+$ git remote set-url {{ remote name }} {{ remote url}}
+# List remotes new one should show up
+$ git remote -v
+# push current branch to remote "publish"
+$ git push publish 
+```
+
+
 
 ## Bibliography
 
