@@ -44,6 +44,7 @@ changes to *publish* repo. Now WIP posts are hidden and page can be served with 
 do we do it? With ```git remote commands```
 
 ```sh
+# Assuming you are on a branch you want to publish
 # Adding remote "publish"
 $ git remote add publish {{ remote url}}
 # Update existing remotes url
@@ -53,6 +54,8 @@ $ git remote -v
 # push current branch to remote "publish"
 $ git push publish 
 ```
+
+And now changes are pushed to repo where GitHub will generate static files and publish GitHub Pages
 
 
 
