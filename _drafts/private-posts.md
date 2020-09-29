@@ -2,7 +2,7 @@
 layout: post
 author: 1stDimension
 title: Private posts on Github
-excerpt: How to have private and public blog using Github Pages, git with multiple remotes.
+excerpt: How to have private and public blog using Github Pages, git with multiple environments.
 ---
 
 ## How Github Pages works
