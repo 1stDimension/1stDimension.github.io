@@ -2,9 +2,10 @@
 layout: post
 author: 1stDimension
 title: Private posts on Github
-excerpt: How to have private and public blog using Github Pages, git with multiple environments.
+excerpt: How to have private and public blog using Github Pages, git with multiple
+  environments.
+date: 2020-10-01 00:03 +0200
 ---
-
 ## How Github Pages works
 
 Github Pages is a feature of Github that allows serving static files. This very site is
