@@ -48,7 +48,7 @@ do we do it? With ```git remote commands```
 # Adding remote "publish"
 $ git remote add publish {% raw %}{{ remote url }}{% endraw %}
 # Update existing remotes url
-$ git remote set-url  {% raw %}}{{ remote name }} {{ remote url }}{% endraw %}
+$ git remote set-url {% raw %}{{ remote name }} {{ remote url }}{% endraw %}
 # List remotes new one should show up
 $ git remote -v
 # push current branch to remote "publish"
