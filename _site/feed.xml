@@ -1,1 +1,292 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-13T00:42:26+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">1stDimension.github.io</title><entry><title type="html">Helloworld</title><link href="http://localhost:4000/2019/08/11/HelloWorld.html" rel="alternate" type="text/html" title="Helloworld" /><published>2019-08-11T00:00:00+02:00</published><updated>2019-08-11T00:00:00+02:00</updated><id>http://localhost:4000/2019/08/11/HelloWorld</id><content type="html" xml:base="http://localhost:4000/2019/08/11/HelloWorld.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;</content><author><name>1stDimension</name></author><summary type="html">Introduction</summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2026-04-08T01:43:57+02:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">X-axis</title><subtitle>Personal blog (eventually) about broadly understood computer science. For now using Jekyll, hosted on Github pages.
+</subtitle><author><name>1stDimension</name></author><entry><title type="html">Private posts on Github</title><link href="http://0.0.0.0:4000/2020/10/01/private-posts.html" rel="alternate" type="text/html" title="Private posts on Github" /><published>2020-10-01T00:03:00+02:00</published><updated>2020-10-01T00:03:00+02:00</updated><id>http://0.0.0.0:4000/2020/10/01/private-posts</id><content type="html" xml:base="http://0.0.0.0:4000/2020/10/01/private-posts.html"><![CDATA[<h2 id="how-github-pages-works">How Github Pages works</h2>
+
+<p>Github Pages is a feature of Github that allows serving static files. This very site is
+accessible thanks to this service. There are limitations. The free plan only includes public
+repo. Paid plans include private ones, the site will still be accessible to the public. This
+is excellent but public repos have their problems. First of all, everything is public. This
+includes work in progress posts, not everything of which might be released. It is very hard
+to create a workflow of releasing only completed posts to the public. You could use branches
+of git. Have a branch for each post and when ready merge them into master. Yet posts will be
+accessible on the branch’s page before going public. Good but we can do better using one of
+git’s features, remotes.</p>
+
+<h2 id="git-a-distributed-version-control-system-vcs">Git a distributed version control system (VCS)</h2>
+
+<p>Git is distributed by nature. Everyone using the system is copying the entire history of changes.
+One client can also operate with many servers, called remotes in git. You can look up
+remotes where your code will be uploaded using this command</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote <span class="nt">-v</span> <span class="c"># -v is just for verbose output</span>
+origin  git@github.com:1stDimension/1stDimension.git <span class="o">(</span>fetch<span class="o">)</span>
+origin  git@github.com:1stDimension/1stDimension.git <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div></div>
+<p>The left column contains names of remotes. The right column contains the URL of where to send changes (<em>push</em>) and from
+where copy changes (<em>fetch</em>). Origin is the name of the default remote.</p>
+
+<p>In the example above both URLs are the same but they don’t have to. This results in sth called
+“Triangular workflow”. Michael Haggerty described it on “The GitHub Blog” <a href="https://github.blog/2015-07-29-git-2-5-including-multiple-worktrees-and-triangular-workflows/#improved-support-for-triangular-workflows">here</a></p>
+
+<h2 id="multiple-remotes-as-multiple-environments-for-github">Multiple remotes as multiple environments for Github</h2>
+
+<p>Remotes are nice and all but how do they solve the problem with all public repos. You can simply
+create 2 repos on Github one private, let’s call it <em>working</em>, one public, let’s call it <em>publish</em>.
+Use working as main repository you push your changes to. For example, when you finish working on your blog post, you can marge “post branch” into a branch from which GitHub pages are served. Then push
+changes to <em>publish</em> repo. Now WIP posts are hidden and pages can be served with a free plan. But how
+do we do it? With <code class="language-plaintext highlighter-rouge">git remote commands</code></p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Assuming you are on a branch you want to publish</span>
+<span class="c"># Adding remote "publish"</span>
+<span class="nv">$ </span>git remote add publish <span class="o">{{</span> remote url <span class="o">}}</span>
+<span class="c"># Update existing remotes url</span>
+<span class="nv">$ </span>git remote set-url <span class="o">{{</span> remote name <span class="o">}}</span> <span class="o">{{</span> remote url <span class="o">}}</span>
+<span class="c"># List remotes new one should show up</span>
+<span class="nv">$ </span>git remote <span class="nt">-v</span>
+<span class="c"># push current branch to remote "publish"</span>
+<span class="nv">$ </span>git push publish 
+</code></pre></div></div>
+
+<p>And now changes are pushed to repo where GitHub will generate static files and publish GitHub Pages</p>
+
+<h2 id="bibliography">Bibliography</h2>
+
+<ol>
+  <li><a href="https://docs.github.com/en/github/working-with-github-pages/about-github-pages">About GitHub Pages</a></li>
+  <li><a href="https://github.blog/2015-07-29-git-2-5-including-multiple-worktrees-and-triangular-workflows/">Git 2.5, including multiple worktrees and triangular workflows</a></li>
+  <li><a href="https://git-scm.com/docs/git-remote">git-remote</a></li>
+  <li><a href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes">Git Basics - Working with Remotes</a></li>
+  <li><a href="https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows">Integration-Manager Workflow</a></li>
+</ol>]]></content><author><name>1stDimension</name></author><summary type="html"><![CDATA[How to have private and public blog using Github Pages, git with multiple environments.]]></summary></entry><entry><title type="html">YAML 101</title><link href="http://0.0.0.0:4000/2020/08/30/yaml_101.html" rel="alternate" type="text/html" title="YAML 101" /><published>2020-08-30T22:02:00+02:00</published><updated>2020-08-30T22:02:00+02:00</updated><id>http://0.0.0.0:4000/2020/08/30/yaml_101</id><content type="html" xml:base="http://0.0.0.0:4000/2020/08/30/yaml_101.html"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p>YAML is short for “YAML Ain’t Markup Language”, it’s a way of storing basic data structures in human
+readable form. You may also have heard about JSON, XML, TOML formats which are also used for this purpose.
+It’s worth mentioning that YAML is a superset  of JSON, meaning any valid JSON file is also a valid YAML
+file. The aim of this blog post is to introduce you to a new format and show a few trick if you knew it
+already</p>
+
+<p>YAML 1.2 specification mentions a few goals</p>
+<ol>
+  <li>YAML is easily readable by humans.</li>
+  <li>YAML data is portable between programming languages.</li>
+  <li>YAML matches the native data structures of agile languages.</li>
+  <li>YAML has a consistent model to support generic tools.</li>
+  <li>YAML supports one-pass processing.</li>
+  <li>YAML is expressive and extensible.</li>
+  <li>YAML is easy to implement and use</li>
+</ol>
+
+<blockquote>
+  <p>:warning: Library used to parse yaml here is PyYaml. Particular library’s complines with the
+specification may vary.</p>
+</blockquote>
+
+<blockquote>
+  <p>:warning: Jekyll theme used here and I believe library used by jekyll for highlighting snippets does not
+work well with some advance yaml syntax e.g. multiline strings variations.</p>
+</blockquote>
+
+<h2 id="basic-syntax">Basic Syntax</h2>
+
+<p>The main reason behind YAML is data structure representation. There are basically 3 structures: sequence,
+map(mapping) and variable, actual document itself is just a big map. As I mentioned previously valid
+JSON is a valid YAML, but YAML can do much more with much less characters. First of all, identifiers for
+structures don’t have to be enclosed in double quotes. Brackets can also be skipped, instead of special
+formatting of the file is used.</p>
+
+<p>An identifier ends with “:” and non zero number of whitespace characters
+after witch formatting determines the structure. If value is in the same line structure created is
+variable. If after “:” newline character is present and some following lines have variables defined in
+them with the same level of indentation but higher than “parent” identifier, this construct is a mapping.
+If next lines start with “-“ then a sequence was created.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">string</span><span class="pi">:</span> <span class="s">value</span>
+<span class="na">integer</span><span class="pi">:</span> <span class="m">1</span>
+<span class="na">float</span><span class="pi">:</span> <span class="m">1.1</span>
+<span class="na">dictionary</span><span class="pi">:</span>
+  <span class="na">key1</span><span class="pi">:</span> <span class="s">value1</span>
+  <span class="na">key2</span><span class="pi">:</span> <span class="s">value2</span>
+<span class="na">array</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">one</span>
+<span class="pi">-</span> <span class="s">two</span>
+<span class="pi">-</span> <span class="s">tree</span>
+</code></pre></div></div>
+
+<p>Great thing about each one of them is the fact that nesting is allowed.
+Do you want array of maps of maps? Piece of cake, just take look.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">array</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">mapZero</span><span class="pi">:</span>
+    <span class="na">key0</span><span class="pi">:</span> 
+      <span class="na">subkey0</span><span class="pi">:</span> <span class="s">s0</span>
+      <span class="na">subkey1</span><span class="pi">:</span> <span class="s">s1</span>
+<span class="pi">-</span> <span class="na">mapOne</span><span class="pi">:</span>
+    <span class="na">key0</span><span class="pi">:</span> 
+      <span class="na">subkey0</span><span class="pi">:</span> <span class="s">s0</span>
+      <span class="na">subkey1</span><span class="pi">:</span> <span class="s">s1</span>
+
+</code></pre></div></div>
+<p>You can create a sequence and a map inline using syntax similar to JSON. This syntax also allows creation
+of documents independent from formatting, albeit it’s less clear this way.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">array</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">mapZero</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">key0</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">subkey0</span><span class="pi">:</span> <span class="nv">s0</span><span class="pi">,</span> <span class="nv">subkey1</span><span class="pi">:</span> <span class="nv">s1</span><span class="pi">}},</span> <span class="nv">mapOne</span><span class="pi">:</span>  <span class="pi">{</span><span class="nv">key0</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">subkey0</span><span class="pi">:</span> <span class="nv">s0</span><span class="pi">,</span> <span class="nv">subkey1</span><span class="pi">:</span> <span class="nv">s1</span><span class="pi">}}]</span>
+</code></pre></div></div>
+<p>Latter 2 snippets of yaml are interchangeable.</p>
+
+<h2 id="advanced-syntax">Advanced Syntax</h2>
+
+<p>YAML, when looked in depth, is much more complex that any one might have anticipated after first contact.
+This section is a breve overview of some less popular but useful features.</p>
+
+<h3 id="multiline-strings">Multiline Strings</h3>
+
+<p>As YAML is supposed to be “easily readable by humans” and sometimes long strings of characters are
+required to be under certain identifier. Let’s say we want to put 256 characters under key “long_string”.
+We can put them in one line</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">long_string</span><span class="pi">:</span> <span class="s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac elit mi. Vestibulum sem orci, placerat sed condimentum id, rutrum imperdiet dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur nullam.</span>
+</code></pre></div></div>
+
+<p>It’s readable to the certain degree but we can do better. For example add double quotes</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">long_string</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Lorem</span><span class="nv"> </span><span class="s">ipsum</span><span class="nv"> </span><span class="s">dolor</span><span class="nv"> </span><span class="s">sit</span><span class="nv"> </span><span class="s">amet,</span><span class="nv"> </span><span class="s">consectetur</span><span class="nv"> </span><span class="s">adipiscing</span><span class="nv"> </span><span class="s">elit.</span>
+<span class="s">Integer</span><span class="nv"> </span><span class="s">ac</span><span class="nv"> </span><span class="s">elit</span><span class="nv"> </span><span class="s">mi.</span><span class="nv"> </span><span class="s">Vestibulum</span><span class="nv"> </span><span class="s">sem</span><span class="nv"> </span><span class="s">orci,</span><span class="nv"> </span><span class="s">placerat</span><span class="nv"> </span><span class="s">sed</span><span class="nv"> </span><span class="s">condimentum</span><span class="nv"> </span><span class="s">id,</span>
+<span class="s">rutrum</span><span class="nv"> </span><span class="s">imperdiet</span><span class="nv"> </span><span class="s">dolor.</span><span class="nv"> </span><span class="s">Vestibulum</span><span class="nv"> </span><span class="s">ante</span><span class="nv"> </span><span class="s">ipsum</span><span class="nv"> </span><span class="s">primis</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">faucibus</span><span class="nv"> </span><span class="s">orci</span>
+<span class="s">luctus</span><span class="nv"> </span><span class="s">et</span><span class="nv"> </span><span class="s">ultrices</span><span class="nv"> </span><span class="s">posuere</span><span class="nv"> </span><span class="s">cubilia</span><span class="nv"> </span><span class="s">curae;</span><span class="nv"> </span><span class="s">Curabitur</span><span class="nv"> </span><span class="s">nullam."</span>
+</code></pre></div></div>
+
+<p>Yaml has multiple versions of multiline strings, depending on character after the identifier. String
+starts form the following line, it has to have increased level of indentation. You could also explicitly
+state number of whitespace characters before each line begins. If unspecified defaults to number of
+whitespace characters before first line in string. Multiple variation go like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">zero</span><span class="pi">:</span> <span class="pi">|2</span>
+   <span class="s">This text is interpreted literally</span>
+   <span class="s">notice this was indented with 3 spaces with string starting at 2</span>
+<span class="na">one</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">This text is interpreted literally</span>
+  <span class="s">new lines are preserved</span>
+<span class="na">two</span><span class="pi">:</span> <span class="pi">&gt;</span>
+  <span class="s">This text is folded</span>
+  <span class="s">newline characters are replaced with spaces</span>
+  
+  <span class="s">blank lines are replaced with newline characters</span>
+<span class="na">tree</span><span class="pi">:</span> <span class="pi">|-</span>
+  <span class="s">In this case trailing newline is removed</span>
+<span class="na">four</span><span class="pi">:</span> <span class="pi">|+</span>
+  <span class="s">Now any trailing newline character is preserved</span>
+
+
+<span class="c1"># Like ones above</span>
+</code></pre></div></div>
+
+<p>When using PyYaml a dictionary was loaded. After using pretty printing pprint module, this is what I got:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>   <span class="sh">'</span><span class="s">four</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Now any trailing newline character is preserved</span><span class="se">\n\n\n</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">one</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">This text is interpreted literally</span><span class="se">\n</span><span class="s">new lines are preserved</span><span class="se">\n</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">tree</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">In this case trailing newline is removed</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">two</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">This text is folded newline characters are replaced with spaces</span><span class="se">\n</span><span class="sh">'</span>
+           <span class="sh">'</span><span class="s">blank lines are replaced with newline characters</span><span class="se">\n</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">zero</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s"> This text is interpreted literally</span><span class="se">\n</span><span class="sh">'</span>
+            <span class="sh">'</span><span class="s"> notice this was indented with 3 spaces with string starting at </span><span class="sh">'</span>
+            <span class="sh">'</span><span class="s">2</span><span class="se">\n</span><span class="sh">'</span><span class="p">}</span>
+</code></pre></div></div>
+<p>Remember that by definition maps are unordered so your mileage may vary. In python it’s a bit more
+complex (check bibliography for Python’s dictionary)</p>
+
+<h3 id="variable-interpretation">Variable interpretation</h3>
+
+<p>Variables in yaml can be mapped (:wink:) to different types, like floats, ints etc. We can also make YAML
+parser do some conversion between different representation of a number. It’s a nice little feature
+allowing for easier variable definition for example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sequence</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">0xFFFFFF</span>
+  <span class="pi">-</span> <span class="s">0xFF0000</span>
+  <span class="pi">-</span> <span class="s">0xFFFFFF</span>
+</code></pre></div></div>
+
+<p>turns into:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="sh">'</span><span class="s">sequence</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="mi">16777215</span><span class="p">,</span> <span class="mi">16711680</span><span class="p">,</span> <span class="mi">16777215</span><span class="p">]}</span>
+</code></pre></div></div>
+
+<p>Some other formats for numbers are listed below:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sequence</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="m">010</span> <span class="c1">#integer interpreted as Base8</span>
+<span class="pi">-</span> <span class="s">0x10</span> <span class="c1">#integer interpreted as hexadecimal</span>
+<span class="pi">-</span> <span class="m">10</span>  <span class="c1">#integer </span>
+<span class="pi">-</span> <span class="m">10.2</span> <span class="c1"># floating point</span>
+<span class="pi">-</span> <span class="s">10.2.1</span> <span class="c1"># string</span>
+</code></pre></div></div>
+
+<p>Using PyYaml this is what was loaded:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="sh">'</span><span class="s">sequence</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span> <span class="sh">'</span><span class="s">10.2.1</span><span class="sh">'</span><span class="p">]}</span>
+</code></pre></div></div>
+
+<h3 id="multiple-documents-in-one-file">Multiple documents in one file</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#document zero</span>
+<span class="na">document_number</span><span class="pi">:</span> <span class="m">0</span>
+<span class="na">just_array</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">one</span><span class="pi">:</span>
+    <span class="na">q</span><span class="pi">:</span> <span class="m">1</span>
+<span class="pi">-</span> <span class="na">two</span><span class="pi">:</span>
+    <span class="na">w</span><span class="pi">:</span> <span class="m">2</span>
+<span class="nn">---</span>
+<span class="nn">---</span>
+<span class="c1">#document one</span>
+<span class="na">document_number</span><span class="pi">:</span> <span class="m">1</span>
+<span class="na">strange_dictionary</span><span class="pi">:</span>
+  <span class="na">k</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">j</span>
+  <span class="pi">-</span> <span class="s">m</span>
+</code></pre></div></div>
+
+<h3 id="anchors">Anchors</h3>
+
+<p>You may have heard about <strong>DRY</strong> principle that is “Don’t Repeat Yourself”. Yaml has a convenient feature
+that allows applying this principle namely anchors, aliases. Anchors behave like variables inside the
+document itself. An anchor is creates using “&amp;anchor_name” syntax. It’s value can be later referenced
+using “*anchor_name” syntax.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variable</span><span class="pi">:</span> <span class="nl">&amp;reference</span> <span class="s">value</span>
+<span class="na">different_variable</span><span class="pi">:</span> <span class="nv">*reference</span> 
+</code></pre></div></div>
+<p>turns into</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="sh">'</span><span class="s">variable</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">different_variable</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is already cool but I m not done yet. In case of more complex structures, like maps and sequences,
+you can actually merge structures together and not override them.  In this case special syntax
+“« : *anchor_name” is used. It’s worth mentioning it was added in YAML 1.1</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">younger_sister</span><span class="pi">:</span> <span class="nl">&amp;one</span>
+ <span class="na">first name</span><span class="pi">:</span> <span class="s">Serena</span> 
+ <span class="na">last name</span><span class="pi">:</span> <span class="s">Williams</span>
+<span class="na">older_sister</span><span class="pi">:</span>
+ <span class="na">&lt;&lt; </span><span class="pi">:</span> <span class="nv">*one</span>
+ <span class="na">first name</span><span class="pi">:</span> <span class="s">Venus</span>
+</code></pre></div></div>
+<p>After parsing it will look like</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>   <span class="sh">'</span><span class="s">older_sister</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">first name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Venus</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">last name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Williams</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">younger_sister</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">first name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Serena</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">last name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Williams</span><span class="sh">'</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Actually you could specify sequence of references after “« :” operator, but inline sequence must be used
+([ item0, item1]). The next one will overrider the previous one. Theoretically after merging operator
+inline dictionary can be specified like ( { q: 0, w: 1} ). As far I know inline dictionary and sequence aren’t 
+actual terms in case of YAML, but I hope you get it.</p>
+
+<h2 id="bibliography">Bibliography</h2>
+
+<ol>
+  <li><a href="https://yaml.org/spec/1.2/spec.pdf">YAML Ain’t Markup Language (YAML™) Version 1.2 3rd Edition, Patched at 2009-10-01</a></li>
+  <li><a href="https://stackoverflow.com/questions/2046807/can-a-variable-like-int-be-considered-a-primitive-fundamental-data-structure">Is variable a data structure: stack overflow discution</a></li>
+  <li><a href="https://github.com/python/cpython/blob/master/Objects/dictobject.c">Python dictionary implementation</a></li>
+  <li><a href="http://blogs.perl.org/users/tinita/2019/05/reusing-data-with-yaml-anchors-aliases-and-merge-keys.html#:~:text=YAML%20Anchors%20and%20Aliases,name%20%2C%20like%20a%20Perl%20reference.">Reusing data with YAML Anchors, Aliases and Merge Keys</a></li>
+</ol>]]></content><author><name>1stDimension</name></author><summary type="html"><![CDATA[Introduction to Yaml data serialization standard]]></summary></entry><entry><title type="html">Hello Blogging</title><link href="http://0.0.0.0:4000/2019/08/11/index.html" rel="alternate" type="text/html" title="Hello Blogging" /><published>2019-08-11T00:00:00+02:00</published><updated>2019-08-11T00:00:00+02:00</updated><id>http://0.0.0.0:4000/2019/08/11/index</id><content type="html" xml:base="http://0.0.0.0:4000/2019/08/11/index.html"><![CDATA[<h2 id="am-i-a-blogger-now">Am I a blogger now?</h2>
+
+<p>This page is my first attempt at blogging. I haven’t decided yet what I will be posting here. I have few ideas, yet no idea where to start. Probably will start by tweaking visual aspects.</p>
+
+<p>Currently I’m using Jekyll to generate sites from markdown files. This sounds like easy way for starting blogging right away. Just pick a theme and you are ready to go. Just like I did.</p>
+
+<p>In future I will probably override files of this theme. For example something like adding a little visualisation to my posts. But I wouldn’t look ahead this far right now. Until I finish work on next post that’s about it.</p>]]></content><author><name>1stDimension</name></author><summary type="html"><![CDATA[Introduction and vague plans for this site]]></summary></entry></feed>
